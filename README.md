@@ -3,18 +3,18 @@ A blueprint for serving heavy Machine Learning models (like Transformer) via an 
 
 ## Overview
 The Sentimentalyzer is a blueprint for serving heavy Machine Learning models (like Transformers) via an HTTP API.
-Unlike standard web applications which are **IO bound** (waiting for databases), Ml services are **Compute bound** (matrix multiplication). This project explores why standard backend patterns fails when servving AI, and implements the **Dynamic Batching** architecture used by production systems like Nvidia Triton, Ray Serve, and vLLM.
+Unlike standard web applications which are **IO bound** (waiting for databases), ML services are **Compute bound** (matrix multiplication). This project explores why standard backend patterns fails when serving AI, and implements the **Dynamic Batching** architecture used by production systems like Nvidia Triton, Ray Serve, and vLLM.
 The goal of this project is to transform a fragile, high-latency prototype into a robust, high-throughput inference engine.
 
 ## The Experiment
-This repository will contain two distinct implementations to demonstrate for the "Infa Gap":
+This repository will contain two distinct implementations to demonstrate for the "Infra Gap":
 
 - The Naive Implementation (Baseline)
 The naive implementation uses a standard FastAPI route that calls the model directly on each incoming request. Requests are handled sequentially, meaning each inference is processed one at a time. As a result, the GPU or CPU often sits idle between requests, throughput quickly reaches a ceiling and latency grows dramatically as concurrency increases.
 
 
 - The High-Performance Implementation (Goal)
-The high-performance implementation is built around a producer-consumer architecture, where the producer asynchronously accepts incoming HTTP request and enqueues them, while a consumer continuously pulls multiple pending requests from the queue, batches them together into a single tensor, and executes on effecient inference pass, resulting in a significantly higher throughput, stable and predictable latency under load, and near-maximum utilization of the underlying hardware.
+The high-performance implementation is built around a producer-consumer architecture, where the producer asynchronously accepts incoming HTTP request and enqueues them, while a consumer continuously pulls multiple pending requests from the queue, batches them together into a single tensor, and executes on efficient inference pass, resulting in a significantly higher throughput, stable and predictable latency under load, and near-maximum utilization of the underlying hardware.
 
 ## Tech Stack
 - Language: Python 3.9+
@@ -24,7 +24,7 @@ The high-performance implementation is built around a producer-consumer architec
 - Benchmarking: Locust.io
 
 ## Getting Started
-1. CLone the repo 
+1. Clone the repo 
 
     ```
     git clone git@github.com:olumidedaramola21/the-sentimentalyzer-service.git
@@ -50,7 +50,7 @@ The high-performance implementation is built around a producer-consumer architec
     pip install -r requirements.txt
     ```
 
-Running the Experiment (Naive Experiment)
+## Running the Experiment (Naive Experiment)
 This experiment demonstrates how a naive ML inference sever breaks down under load.
 1. Start the Naive Server (Baseline)
     ```
@@ -92,7 +92,7 @@ At a low load, the system remains functional but is already showing signs reques
 
 
 ### 2. Saturation (50 Concurrent Users)
-At 50 concurrent users, the system reaches its **throughput ceiling**. The CPU is fully saturated executing inference sequentially, and additional concurrency no longer translates into higer throughput.
+At 50 concurrent users, the system reaches its **throughput ceiling**. The CPU is fully saturated executing inference sequentially, and additional concurrency no longer translates into higher throughput.
     - **RPS:** ~12 req/s (plateaued)
     - **Median Latency (p50):** ~3700 ms
     - **Max Latency:** ~6200 ms
