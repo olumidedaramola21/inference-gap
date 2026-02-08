@@ -81,10 +81,10 @@ To demonstrate why standard web architectures fail for AI workloads, I stress-te
 
 ### 1. Baseline (10 Concurrent Users)
 At a low load, the system remains functional but is already showing signs request blocking and inefficient hardware utilization.
-    - **RPS:** ~12 req/s
-    - **Median Latency (p50):** ~460 ms
-    - **Max Latency:** ~3600 ms
-    - **Status:** Functional, but significantly slower than a typical IO-bound web service.
+- **RPS:** ~12 req/s
+- **Median Latency (p50):** ~460 ms
+- **Max Latency:** ~3600 ms
+- **Status:** Functional, but significantly slower than a typical IO-bound web service.
 
 ![10 Users Chart](./benchmarks/baseline_screenshots/10_users_chart.png)
 ![Server locust metrics](./benchmarks/baseline_screenshots/baseline_10_users_naive_server_locust_metrics.png)
@@ -93,10 +93,10 @@ At a low load, the system remains functional but is already showing signs reques
 
 ### 2. Saturation (50 Concurrent Users)
 At 50 concurrent users, the system reaches its **throughput ceiling**. The CPU is fully saturated executing inference sequentially, and additional concurrency no longer translates into higher throughput.
-    - **RPS:** ~12 req/s (plateaued)
-    - **Median Latency (p50):** ~3700 ms
-    - **Max Latency:** ~6200 ms
-    - **Status:** Saturated. Request begins to queue aggressively, resulting in noticeable and increasing user-facing latency.
+- **RPS:** ~12 req/s (plateaued)
+- **Median Latency (p50):** ~3700 ms
+- **Max Latency:** ~6200 ms
+- **Status:** Saturated. Request begins to queue aggressively, resulting in noticeable and increasing user-facing latency.
 
 ![50 Users Chart](./benchmarks/baseline_screenshots/50_users_chart.png)
 ![Server locust metrics](./benchmarks/baseline_screenshots/baseline_50_users_naive_server_locust_metrics.png)
@@ -104,10 +104,10 @@ At 50 concurrent users, the system reaches its **throughput ceiling**. The CPU i
 
 ### 3. Latency Collapse (100 Concurrent Users)
 At 100 concurrent users, the system  remains throughput-bound but experiences a severe **latency collapse**. The server continues processing at its maximum sustainable rate, but excessive queueing causes the reponse time to grow dramatically.
-    - **RPS:** ~12 req/s (unchanged, throughput-bound)
-    - **Median Latency (p50):** ~7,700 ms (7.7 s)
-    - **Max Latency:** ~11,000 ms (11 s)
-    - **Status:** Functionally alive, but practically unusable due to extreme tail latency.
+- **RPS:** ~12 req/s (unchanged, throughput-bound)
+- **Median Latency (p50):** ~7,700 ms (7.7 s)
+- **Max Latency:** ~11,000 ms (11 s)
+- **Status:** Functionally alive, but practically unusable due to extreme tail latency.
 
 ![100 Users Chart](./benchmarks/baseline_screenshots/100_users_chart.png)
 ![Server locust metrics](./benchmarks/baseline_screenshots/baseline_100_users_naive_server_locust_metrics.png)
