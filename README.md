@@ -1,8 +1,8 @@
-# the-sentimentalyzer-service
+# inference-gap
 A blueprint for serving heavy Machine Learning models (like Transformer) via an HTTP API.
 
 ## Overview
-The Sentimentalyzer is a blueprint for serving heavy Machine Learning models (like Transformers) via an HTTP API.
+The inference-gap is a blueprint for serving heavy Machine Learning models (like Transformers) via an HTTP API.
 Unlike standard web applications which are **IO bound** (waiting for databases), ML services are **Compute bound** (matrix multiplication). This project explores why standard backend patterns fails when serving AI, and implements the **Dynamic Batching** architecture used by production systems like Nvidia Triton, Ray Serve, and vLLM.
 The goal of this project is to transform a fragile, high-latency prototype into a robust, high-throughput inference engine.
 
@@ -27,8 +27,8 @@ The high-performance implementation is built around a producer-consumer architec
 1. Clone the repo 
 
     ```
-    git clone git@github.com:olumidedaramola21/the-sentimentalyzer-service.git
-    cd sentimentalyzer
+    git clone https://github.com/olumidedaramola21/inference-gap.git
+    cd inference-gap
     ```
 
 2. Set up Virtual Environment
